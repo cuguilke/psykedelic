@@ -51,7 +51,7 @@ compression_modes_str = """
 	Supported compression modes for benchmarking:
 		- all							: includes every algorithm specified below
 		- det							: abs determinant of the kernel
-		- det_corr						: abs determinant of the correlation matrix of the given kernel K (K.T * K)
+		- det_corr						: abs determinant of the Grammian matrix of the given kernel K (K.T * K)
 		- det_contrib					: relative abs determinant of the kernel w.r.t all kernels within a given neuron
 		- det_sorted_kernels			: for each neuron bottom X%% of the kernels are killed w.r.t abs determinants
 		- det_sorted_neurons			: sum of kernel abs determinants determines the significance and bottom X%% of the neurons are killed
