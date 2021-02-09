@@ -17,7 +17,14 @@ This repository contains the official codes that are used to conduct the experim
 
 If you use these codes in your research, please cite:
 
-<TBD>
+```
+@article{cugu2021deeper,
+  title={A Deeper Look into Convolutions via Pruning},
+  author={Cugu, Ilke and Akbas, Emre},
+  journal={arXiv preprint arXiv:2102.02804},
+  year={2021}
+}
+```
   
 ## Prerequisites
 
