@@ -20,7 +20,7 @@ This repository contains the official codes that are used to conduct the experim
 
 If you use these codes in your research, please cite:
 
-```
+```bibtex
 @article{cugu2021deeper,
   title={A Deeper Look into Convolutions via Pruning},
   author={Cugu, Ilke and Akbas, Emre},
@@ -29,9 +29,21 @@ If you use these codes in your research, please cite:
 }
 ```
   
-## Prerequisites
+## Getting Started
+- Prerequisites:
+```
+Python 3.7
+Keras 2.2.4
+Tensorflow 1.15
+matplotlib 3.1.1
+matplotlib_venn 0.11.5
+NumPy 1.17.2
+SciPy 1.3.1
+scikit-learn 0.21.3
+overrides 2.8.0
+```
 
-Please refer to the YAML script (dev.yml) that is prepared for an easy Anaconda environment setup. 
+- We also include a YAML script `./dev.yml` that is prepared for an easy Anaconda environment setup. 
 
 ## Training
 
