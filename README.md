@@ -57,7 +57,7 @@ We include a sample script `./run_experiments.sh` for a quick start.
 
 ## Analysis
 
-In order to understand the statistical significance of the empirical results, `./analysis/ExperimentRecorder.py` stores cumulative results in `./experiment.json`.
+In order to understand the statistical significance of the empirical results, `./analysis/ExperimentRecorder.py` stores cumulative results in [experiments.json](https://www.dropbox.com/s/62utgg7z9p2fqc7/experiments.json?dl=0).
 
 Then, we use `./analysis/ExperimentProcessor.py` to examine the accumulated empirical data:
 
