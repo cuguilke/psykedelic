@@ -75,4 +75,4 @@ python ExperimentProcessor.py --set_analysis
 ```
 python ExperimentProcessor.py --pruning_per_threshold
 ```
-![MicroResNet50_pruning_per_threshold.pdf](https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_threshold.pdf)
+![](https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_threshold.png?raw=true)
