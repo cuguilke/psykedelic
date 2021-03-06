@@ -61,6 +61,7 @@ class ExperimentProcessor:
 								  "dataset": dataset,
 								  "l1_penalty": l1_penalty,
 								  "threshold": threshold}
+		self.image_format = config["image_format"]
 		self.config = config
 		self.to_dir = to_dir
 		self.path = path
@@ -652,7 +653,7 @@ class ExperimentProcessor:
 
 			for experiment in hist:
 				if self.is_selected(experiment):
-					to_file = os.path.join(self.to_dir, "%s.png" % ("_".join(experiment.split(":"))))
+					to_file = os.path.join(self.to_dir, "%s.%s" % ("_".join(experiment.split(":")), self.image_format))
 					thresholds = hist[experiment][0]["thresholds"]
 					threshold_count = len(thresholds)
 					entry_count = len(hist[experiment])
@@ -797,7 +798,7 @@ class ExperimentProcessor:
 
 				# Save the figure
 				file_name = "ThinMicroResNet" if model_mode == "else" else model_mode
-				to_file = os.path.join(self.to_dir, "%s_pruning_per_threshold.pdf" % file_name)
+				to_file = os.path.join(self.to_dir, "%s_pruning_per_threshold.%s" % (file_name, self.image_format))
 				plt.tight_layout()
 				plt.savefig(to_file, bbox_inches="tight")
 				plt.close(fig)
@@ -815,7 +816,7 @@ class ExperimentProcessor:
 				if self.is_selected(experiment):
 					for threshold in hist[experiment]:
 						for compression_mode in hist[experiment][threshold]:
-							to_file = os.path.join(self.to_dir, "%s_%s_%s.png" % ("_".join(experiment.split(":")), threshold, compression_mode))
+							to_file = os.path.join(self.to_dir, "%s_%s_%s.%s" % ("_".join(experiment.split(":")), threshold, compression_mode, self.image_format))
 							layer_names = hist[experiment][threshold][compression_mode][0]["layer_names"]
 							total_params = [float(s) for s in hist[experiment][threshold][compression_mode][0]["total_params"]]
 							active_params_percentage_dict = {layer: [] for layer in layer_names}
@@ -989,7 +990,7 @@ class ExperimentProcessor:
 								ax.view_init(30, 272)
 
 				file_name = "ThinMicroResNet" if model_mode == "else" else model_mode
-				to_file = os.path.join(self.to_dir, "%s_pruning_per_layer.pdf" % file_name)
+				to_file = os.path.join(self.to_dir, "%s_pruning_per_layer.%s" % (file_name, self.image_format))
 				fig.subplots_adjust(wspace=0)
 				plt.grid(False)
 				plt.tight_layout()
@@ -1192,7 +1193,7 @@ class ExperimentProcessor:
 						for category in results:
 							# Plot the chart
 							fig = plt.figure(figsize=(23, 11))
-							to_file = os.path.join(self.to_dir, "%s_%s_%s.png" % ("_".join(model_name.split(":")), threshold, category))
+							to_file = os.path.join(self.to_dir, "%s_%s_%s.%s" % ("_".join(model_name.split(":")), threshold, category, self.image_format))
 
 							# Chart data
 							y_pos = np.arange(len(datasets))
@@ -1378,7 +1379,7 @@ class ExperimentProcessor:
 					fig.subplots_adjust(bottom=0.02)
 
 					file_name = "ThinMicroResNet" if model_mode == "else" else model_mode
-					to_file = os.path.join(self.to_dir, "%s_%s_history_winners.pdf" % (file_name, category))
+					to_file = os.path.join(self.to_dir, "%s_%s_history_winners.%s" % (file_name, category, self.image_format))
 					#plt.legend(fontsize=11)
 					plt.grid(False)
 					plt.tight_layout()
@@ -1512,7 +1513,7 @@ class ExperimentProcessor:
 					fig.subplots_adjust(bottom=0.02)
 
 					file_name = "ThinMicroResNet" if model_mode == "else" else model_mode
-					to_file = os.path.join(self.to_dir, "%s_%s_history_full.pdf" % (file_name, category))
+					to_file = os.path.join(self.to_dir, "%s_%s_history_full.%s" % (file_name, category, self.image_format))
 					#plt.legend(fontsize=11)
 					plt.tight_layout()
 					plt.savefig(to_file, bbox_inches="tight")
@@ -1583,6 +1584,7 @@ if __name__ == '__main__':
 	parser.add_argument("--learning_curve", help="", action="store_true")
 	parser.add_argument("--include_extended_results", help="to enable drawing case study charts, when applicable", action="store_true")
 	parser.add_argument("--merge_logs", help="merges experiment results for the given JSON file paths", nargs="+")
+	parser.add_argument("--image_format", default="pdf", help="", type=str)
 	args = vars(parser.parse_args())
 
 	hist_path = args["path"]
