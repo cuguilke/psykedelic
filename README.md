@@ -61,7 +61,7 @@ In order to understand the statistical significance of the empirical results, `.
 
 Then, we use `./analysis/ExperimentProcessor.py` to examine the accumulated empirical data:
 
-- In order to produce complex vs. real eigenvalue distribution statistics LaTeX table:
+- In order to produce complex vs. real eigenvalue distribution statistics LaTeX tables:
 ```
 python ExperimentProcessor.py --eig_stats
 ```
