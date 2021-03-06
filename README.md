@@ -5,8 +5,9 @@ psykedelic: Pruning SYstem in KEras for a DEeper Look Into Convolutions
 
 1. [Introduction](#introduction)
 2. [Citation](#citation)
-3. [Prerequisites](#prerequisites)
+3. [Getting Started](#getting started)
 4. [Training](#training)
+5. [Analysis](#analysis)
 
 
 ## Introduction
@@ -51,3 +52,29 @@ Training is done via run.py. To get the up-to-date list of commands:
 ```
 python run.py --help
 ```
+
+We include a sample script `./run_experiments.sh` for a quick start.
+
+## Analysis
+
+In order to understand the statistical significance of the empirical results, `./analysis/ExperimentRecorder.py` stores cumulative results in `./experiment.json`.
+
+Then, we use `./analysis/ExperimentProcessor.py` to examine the accumulated empirical data:
+
+- In order to produce complex vs. real eigenvalue distribution statistics LaTeX table:
+```
+python ExperimentProcessor.py --eig_stats
+```
+
+- In order to produce the set analysis charts that we include in the Appendix of the paper:
+```
+python ExperimentProcessor.py --set_analysis
+```
+
+- In order to produce the pruning per significance threshold charts:
+```
+python ExperimentProcessor.py --pruning_per_threshold
+```
+
+![alt text](https://github.com/cuguilke/psykedelic/blob/[resuls/MicroResNet50_pruning_per_threshold.pdf?raw=true)
+![alt text](https://github.com/cuguilke/psykedelic/blob/[resuls/ThinMicroResNet_pruning_per_threshold.pdf?raw=true)
