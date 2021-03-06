@@ -5,7 +5,7 @@ psykedelic: Pruning SYstem in KEras for a DEeper Look Into Convolutions
 
 1. [Introduction](#introduction)
 2. [Citation](#citation)
-3. [Getting Started](#getting started)
+3. [Getting Started](#getting)
 4. [Training](#training)
 5. [Analysis](#analysis)
 
@@ -75,12 +75,11 @@ python ExperimentProcessor.py --set_analysis
 ```
 python ExperimentProcessor.py --pruning_per_threshold
 ```
-<object data="https://github.com/cuguilke/psykedelic/blob/resuls/MicroResNet50_pruning_per_threshold.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="https://github.com/cuguilke/psykedelic/blob/resuls/MicroResNet50_pruning_per_threshold.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/cuguilke/psykedelic/blob/resuls/MicroResNet50_pruning_per_threshold.pdf">Download PDF</a>.</p>
+<object data="https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_threshold.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_threshold.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_threshold.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
 
-![alt text](https://github.com/cuguilke/psykedelic/blob/resuls/MicroResNet50_pruning_per_threshold.pdf?raw=true)
-![alt text](https://github.com/cuguilke/psykedelic/blob/resuls/ThinMicroResNet_pruning_per_threshold.pdf?raw=true)
+![alt text](https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_threshold.pdf?raw=true)
