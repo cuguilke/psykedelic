@@ -3,13 +3,14 @@ Title           :ExperimentProcessor.py
 Description     :Analysis and visualization tool for cumulative empirical results of ExperimentRecorder
 Author          :Ilke Cugu
 Date Created    :12-02-2020
-Date Modified   :09-11-2020
-version         :1.3.6
+Date Modified   :06-03-2021
+version         :1.3.7
 python_version  :3.6.6
 """
 
 import os
 import json
+import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
@@ -21,6 +22,7 @@ class ExperimentProcessor:
 	Custom class to analyze and visualiza the cumulative experimental results
 
 	# Arguments
+		:param config: (dict)
 		:param model: (string)
 		:param optimizer: (string)
 		:param loss: (string)
@@ -35,6 +37,7 @@ class ExperimentProcessor:
 		:param path: (string) absolute path to 'experiment.json' file if already exists
 	"""
 	def __init__(self,
+				 config,
 				 model=None,
 				 optimizer=None,
 				 loss=None,
@@ -58,6 +61,7 @@ class ExperimentProcessor:
 								  "dataset": dataset,
 								  "l1_penalty": l1_penalty,
 								  "threshold": threshold}
+		self.config = config
 		self.to_dir = to_dir
 		self.path = path
 		self.hist = {}
@@ -572,7 +576,7 @@ class ExperimentProcessor:
 					for threshold in hist[experiment]:
 						compression_mode_codes = hist[experiment][threshold][0]["codes"]
 						entry_count = len(hist[experiment][threshold])
-						to_file = os.path.join(self.to_dir, "%s_%s.pdf" % ("_".join(experiment.split(":")), threshold))
+						to_file = os.path.join(self.to_dir, "%s_%s.png" % ("_".join(experiment.split(":")), threshold))
 
 						# Accumulate data
 						group_dict = {}
@@ -607,11 +611,6 @@ class ExperimentProcessor:
 						y_pos = np.arange(group_count)
 						rects = ax1.bar(y_pos, sizes_avg, bar_width, alpha=opacity, color=self.tableau20[:group_count], yerr=sizes_std, capsize=5)
 						self.auto_label_pruning(rects, sizes_avg)
-						temp = experiment.split(":")
-						model_name = temp[0][5:]
-						init_mode = temp[6]
-						dataset = temp[7]
-						ax1.set_title("%s - %s - %s" % (model_name, dataset, init_mode))
 						ax1.set_xticks(y_pos)
 						ax1.set_xticklabels(groups, rotation=33)
 						ax1.set_ylabel('Pruned/Total param ratio (%)')
@@ -1528,33 +1527,41 @@ class ExperimentProcessor:
 		pass
 
 	def run(self):
-
+		# Process selected charts
+		chart_types = []
 		for chart_type in self.hist:
+			if chart_type in self.config and self.config[chart_type]:
+				chart_types.append(chart_type)
+
+		# Generate selected charts
+		for chart_type in chart_types:
 			print("Plotting...", chart_type)
 
 			if chart_type == "eig_stats":
 				self.export_eig_stats_tex(self.hist["eig_stats"])
 
-			#elif chart_type == "eig_analysis":
-			#	self.plot_eig_analysis(self.hist["eig_analysis"])
+			elif chart_type == "eig_analysis":
+				self.plot_eig_analysis(self.hist["eig_analysis"])
 
 			elif chart_type == "set_analysis":
 				self.plot_set_analysis(self.hist["set_analysis"])
 
-			#elif chart_type == "pruning_per_threshold":
-			#	self.plot_pruning_per_threshold(self.hist["pruning_per_threshold"])
-			#	self.plot_pruning_per_threshold_miniature(self.hist["pruning_per_threshold"])
+			elif chart_type == "pruning_per_threshold":
+				if self.config["include_extended_results"]:
+					self.plot_pruning_per_threshold(self.hist["pruning_per_threshold"])
+				self.plot_pruning_per_threshold_miniature(self.hist["pruning_per_threshold"])
 
-			#elif chart_type == "pruning_per_layer":
-			#	self.plot_pruning_per_layer(self.hist["pruning_per_layer"])
-			#	self.plot_pruning_per_layer_miniature(self.hist["pruning_per_layer"])
+			elif chart_type == "pruning_per_layer":
+				if self.config["include_extended_results"]:
+					self.plot_pruning_per_layer(self.hist["pruning_per_layer"])
+				self.plot_pruning_per_layer_miniature(self.hist["pruning_per_layer"])
 
-			#elif chart_type == "performance":
-			#	self.plot_performance(self.hist["performance"], export_png=False)
+			elif chart_type == "performance":
+				self.plot_performance(self.hist["performance"], export_png=False)
 
-			#elif chart_type == "performance_history":
-			#	self.plot_performance_history_winners(self.hist["performance_history"])
-			#	self.plot_performance_history_full(self.hist["performance_history"])
+			elif chart_type == "performance_history":
+				self.plot_performance_history_winners(self.hist["performance_history"])
+				self.plot_performance_history_full(self.hist["performance_history"])
 
 			elif chart_type == "learning_curve":
 				self.plot_learning_curve(self.hist["learning_curve"])
@@ -1562,8 +1569,27 @@ class ExperimentProcessor:
 		print("Done.")
 
 if __name__ == '__main__':
-	experimentProcessor = ExperimentProcessor(path="C:\\Users\\muare\\Desktop\\experiment_ALL_2020_09_15.json", to_dir="C:\\Users\\muare\\Desktop\\CompressionResults")
-	experimentProcessor.update_logs(update_set_analysis=True, update_performance_history=True)
-	experimentProcessor.run()
+	# Dynamic parameters
+	parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+	parser.add_argument("--path", default="../experiment.json", help="filepath to experiment history (JSON file)", type=str)
+	parser.add_argument("--to_dir", default="../results", help="filepath to save charts, models, etc.", type=str)
+	parser.add_argument("--eig_stats", help="", action="store_true")
+	parser.add_argument("--eig_analysis", help="", action="store_true")
+	parser.add_argument("--set_analysis", help="", action="store_true")
+	parser.add_argument("--pruning_per_threshold", help="", action="store_true")
+	parser.add_argument("--pruning_per_layer", help="", action="store_true")
+	parser.add_argument("--performance", help="", action="store_true")
+	parser.add_argument("--performance_history", help="", action="store_true")
+	parser.add_argument("--learning_curve", help="", action="store_true")
+	parser.add_argument("--include_extended_results", help="to enable drawing case study charts, when applicable", action="store_true")
+	parser.add_argument("--merge_logs", help="merges experiment results for the given JSON file paths", nargs="+")
+	args = vars(parser.parse_args())
 
-	#experimentProcessor.merge_logs(path="C:\\Users\\muare\\Desktop\\experiment_tiny_imagenet_7.json")
+	hist_path = args["path"]
+	experimentProcessor = ExperimentProcessor(path=hist_path, to_dir=args["to_dir"], config=args)
+	if args["merge_logs"] is None:
+		experimentProcessor.update_logs(update_set_analysis=True, update_performance_history=True)
+		experimentProcessor.run()
+	else:
+		for log_path in args["merge_logs"]:
+			experimentProcessor.merge_logs(path=log_path)
