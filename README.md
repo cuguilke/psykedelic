@@ -81,18 +81,15 @@ python ExperimentProcessor.py --set_analysis
 python ExperimentProcessor.py --pruning_per_threshold
 ```
 ![...](https://github.com/cuguilke/psykedelic/blob/main/results/ThinMicroResNet_pruning_per_threshold.png?raw=true)
-![...](https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_threshold.png?raw=true)
 
 - In order to produce the pruning per layer charts:
 ```
 python ExperimentProcessor.py --pruning_per_layer
 ``` 
 ![...](https://github.com/cuguilke/psykedelic/blob/main/results/ThinMicroResNet_pruning_per_layer.png?raw=true)
-![...](https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_pruning_per_layer.png?raw=true)
 
 - In order to produce the pruning through epochs charts:
 ```
 python ExperimentProcessor.py --performance_history
 ``` 
 ![...](https://github.com/cuguilke/psykedelic/blob/main/results/ThinMicroResNet_score_history_full.png?raw=true)
-![...](https://github.com/cuguilke/psykedelic/blob/main/results/MicroResNet50_score_history_full.png?raw=true)
