@@ -5,7 +5,7 @@ psykedelic: Pruning SYstem in KEras for a DEeper Look Into Convolutions
 
 1. [Introduction](#introduction)
 2. [Citation](#citation)
-3. [Getting Started](#gettingstarted)
+3. [Dependencies](#dependencies)
 4. [Training](#training)
 5. [Analysis](#analysis)
 
@@ -15,7 +15,7 @@ psykedelic: Pruning SYstem in KEras for a DEeper Look Into Convolutions
 This repository contains the official codes that are used to conduct the experiments described in the paper:
 
 > [**A Deeper Look into Convolutions via Pruning**](https://arxiv.org/abs/2102.02804)            
-> [Ilke Cugu](https://user.ceng.metu.edu.tr/~e1881739/), [Emre Akbas](https://user.ceng.metu.edu.tr/~emre/)         
+> [Ilke Cugu](https://cuguilke.github.io/), [Emre Akbas](https://user.ceng.metu.edu.tr/~emre/)         
 
 ## Citation
 
@@ -30,7 +30,7 @@ If you use these codes in your research, please cite:
 }
 ```
   
-## Getting Started
+## Dependencies
 - Prerequisites:
 ```
 Python 3.7
