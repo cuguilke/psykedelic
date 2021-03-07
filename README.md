@@ -1,5 +1,5 @@
 # psykedelic
-psykedelic: Pruning SYstem in KEras for a DEeper Look Into Convolutions
+psykedelic: <ins>P</ins>runing <ins>Sy</ins>stem in <ins>Ke</ins>ras for a <ins>De</ins>eper <ins>L</ins>ook <ins>I</ins>nto <ins>C</ins>onvolutions
 
 ## Table of Contents
 
