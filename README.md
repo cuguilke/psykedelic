@@ -14,7 +14,7 @@
 
 This repository contains the official codes that are used to conduct the experiments described in the paper:
 
-> [**A Deeper Look into Convolutions via Eigenvalue-base Pruning**](https://arxiv.org/abs/2102.02804)            
+> [**A Deeper Look into Convolutions via Eigenvalue-based Pruning**](https://arxiv.org/abs/2102.02804)            
 > [Ilke Cugu](https://cuguilke.github.io/), [Emre Akbas](https://user.ceng.metu.edu.tr/~emre/)         
 
 ## Citation
