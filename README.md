@@ -23,7 +23,7 @@ If you use these codes in your research, please cite:
 
 ```bibtex
 @article{cugu2021deeper,
-  title={A Deeper Look into Convolutions via Pruning},
+  title={A Deeper Look into Convolutions via Eigenvalue-based Pruning},
   author={Cugu, Ilke and Akbas, Emre},
   journal={arXiv preprint arXiv:2102.02804},
   year={2021}
